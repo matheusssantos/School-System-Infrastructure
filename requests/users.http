@@ -1,0 +1,25 @@
+GET http://localhost:8080/users
+
+###
+
+POST http://localhost:8080/users/create
+Content-Type: application/json
+
+{
+  "name": "Pedro Certezas",
+  "rg": "000.000.000-01",
+  "type": "Teachser",
+  "address": {
+    "street": "Dr Fernando Mendes Ribeiro",
+	  "number": "000",
+	  "zipcode": "92700-00"
+  }
+}
+
+###
+
+GET http://localhost:8080/users/uuid/CODE0.290169802737920
+
+###
+
+GET http://localhost:8080/users/name/pedro
