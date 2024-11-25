@@ -1,0 +1,17 @@
+GET http://127.0.0.1:8000/subjects
+
+###
+
+POST http://127.0.0.1:8000/subjects/create
+Content-Type: application/json
+
+{
+  "code": "S001",
+  "name": "FDS",
+  "turn": "A",
+  "classCode": 1
+}
+
+###
+
+GET http://127.0.0.1:8000/subjects/S001/students
