@@ -1,13 +1,15 @@
-from app.functions import createErrorResponse, createSuccessResponse
+from app.functions import create_error_response, create_success_response
 from app.dtos import CreateSubjetctDto
+from app.database import Database
 
 class SubjectService:
   
-  async def getAll():
+  async def get_all():
     try:
-      return createSuccessResponse("Lista de materias")
+      response = await Database.execute_query("SELECT * FROM subjects")
+      return create_success_response(response)
     except Exception:
-      return createErrorResponse("Erro interno no servidor")
+      return create_error_response("Erro interno no servidor")
     
   async def create(data: CreateSubjetctDto):
     try:
@@ -15,18 +17,18 @@ class SubjectService:
       
       # Valdia se criou
       
-      return createSuccessResponse(data)
+      return create_success_response(data)
     except Exception:
-      return createErrorResponse("Erro interno no servidor")
+      return create_error_response("Erro interno no servidor")
     
-  async def getStudents(subjectCode: int):
+  async def get_students(subjectCode: int):
     try:
       # Busca a materia no banco
       
       # Busca todas as matriculas de tal materia
       
-      return createSuccessResponse(subjectCode)
+      return create_success_response(subjectCode)
     except Exception:
-      return createErrorResponse("Erro interno no servidor")
+      return create_error_response("Erro interno no servidor")
 
     
