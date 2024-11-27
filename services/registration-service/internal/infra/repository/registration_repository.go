@@ -23,7 +23,7 @@ func NewRegistrationPostgres(dbSchool *sql.DB, dbUsers *sql.DB) *RegistrationRep
 	}
 }
 
-// Criação da matricula
+// Criação da matrícula
 func (r *RegistrationRepository) Create(registration *entity.Registration) error {
 	// Verificar se o estudante existe no banco de usuários
 	var studentName string
@@ -35,17 +35,31 @@ func (r *RegistrationRepository) Create(registration *entity.Registration) error
 		return err
 	}
 
-	// Verificar se a turma existe no banco de disciplinas/turmas
-	var groupName string
-	err = r.DBSchool.QueryRow("SELECT name FROM groups WHERE id = ?", registration.GroupID).Scan(&groupName)
+	// Verificar se o grupo (turma) existe no banco de grupos
+	var groupExists int
+	err = r.DBSchool.QueryRow("SELECT 1 FROM groups WHERE id = ?", registration.GroupID).Scan(&groupExists)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return fmt.Errorf("turma com ID %d não encontrada", registration.GroupID)
+			return fmt.Errorf("grupo com ID %d não encontrado", registration.GroupID)
 		}
 		return err
 	}
 
-	// Matricular o estudante na turma
+	// Verificar se o estudante já está matriculado no grupo
+	var existingRegistration int
+	err = r.DBSchool.QueryRow("SELECT 1 FROM registration WHERE user_id = ? AND group_id = ?", registration.UserID, registration.GroupID).Scan(&existingRegistration)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			// Nenhuma matrícula encontrada, podemos prosseguir para criar a matrícula
+		} else {
+			return err
+		}
+	} else {
+		// Se o valor retornado for 1, significa que o estudante já está matriculado
+		return fmt.Errorf("estudante com ID %d já está matriculado no grupo com ID %d", registration.UserID, registration.GroupID)
+	}
+
+	// Criar a matrícula (registrar o estudante na turma)
 	_, err = r.DBSchool.Exec(
 		"INSERT INTO registration (user_id, group_id) VALUES (?, ?)",
 		registration.UserID, registration.GroupID,
@@ -59,10 +73,10 @@ func (r *RegistrationRepository) Create(registration *entity.Registration) error
 
 func (r *RegistrationRepository) FindGroupsByStudentID(studentID int) ([]entity.Group, error) {
 	query := `
-		SELECT g.id, g.discipline_id, g.name
-		FROM registration r
-		JOIN groups g ON r.group_id = g.id
-		WHERE r.user_id = ?
+		SELECT g.id, g.subject_id
+		FROM registrations r
+		JOIN group g ON r.id = g.subject_id
+		WHERE g.user_id = ?
 	`
 	rows, err := r.DBSchool.Query(query, studentID)
 	if err != nil {
@@ -90,7 +104,7 @@ func (r *RegistrationRepository) FindStudentsByGroupID(groupID int) ([]entity.St
 	// Consultar os IDs dos estudantes matriculados na turma
 	query := `
 		SELECT user_id
-		FROM registration
+		FROM group
 		WHERE group_id = ?
 	`
 	rows, err := r.DBSchool.Query(query, groupID)
@@ -116,7 +130,7 @@ func (r *RegistrationRepository) FindStudentsByGroupID(groupID int) ([]entity.St
 	var students []entity.Student
 	for _, id := range studentIDs {
 		var student entity.Student
-		err := r.DBUsers.QueryRow("SELECT id, name, rg, type FROM users WHERE id = ?", id).
+		err := r.DBUsers.QueryRow("SELECT id, name, rg, type FROM user WHERE id = ?", id).
 			Scan(&student.ID, &student.Name, &student.RG, &student.Type)
 		if err != nil {
 			return nil, fmt.Errorf("erro ao buscar dados do estudante ID %d: %v", id, err)

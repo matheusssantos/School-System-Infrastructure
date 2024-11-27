@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from app.dtos import CreateSubjetctDto
 from app.services import SubjectService
+from app.logger import Logger
 
 SUBJECT_ROUTER = APIRouter(prefix="/subjects")
 
@@ -9,9 +10,7 @@ async def getAllSubjects():
   return await SubjectService.get_all()
 
 @SUBJECT_ROUTER.post("/create")
-async def create(body: CreateSubjetctDto):
+async def create(body: CreateSubjetctDto):  
+  print(body)
   return await SubjectService.create(body)
 
-@SUBJECT_ROUTER.get("/{code}/students")
-async def getStudentsBySubject(code: str):
-  return await SubjectService.get_students(code)

@@ -1,0 +1,32 @@
+##
+##Criar disciplina
+POST http://127.0.0.1:8000/subjects/create
+Content-Type: application/json
+
+{
+  "code": "S001",
+  "name": "FDS",
+  "turn": "A"
+}
+
+##
+##
+POST http://127.0.0.1:8000/subjects/create
+Content-Type: application/json
+
+{
+  "code": "S002",
+  "name": "psa",
+  "turn": "b"
+}
+
+
+##
+POST http://127.0.0.1:8080/registrations
+Content-Type: application/json
+
+{
+    "user_id": 3
+    "group_id": 
+}
+/registration"

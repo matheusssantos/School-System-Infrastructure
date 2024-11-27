@@ -9,8 +9,6 @@ import com.pucrs.api.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
-
-  User findByUuid(String uuid);
-
+  User findById(int id);
   List<User> findByNameContaining(String name);
 }

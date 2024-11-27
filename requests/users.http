@@ -1,14 +1,12 @@
-GET http://localhost:8080/users
-
-###
-
-POST http://localhost:8080/users/create
+# FUNCIONA
+# CRIA ALUNO
+POST http://localhost:8081/users/create
 Content-Type: application/json
 
 {
-  "name": "Pedro Certezas",
+  "name": "Pedro Certezas4",
   "rg": "000.000.000-01",
-  "type": "Teachser",
+  "type": "Student",
   "address": {
     "street": "Dr Fernando Mendes Ribeiro",
 	  "number": "000",
@@ -17,9 +15,16 @@ Content-Type: application/json
 }
 
 ###
-
-GET http://localhost:8080/users/uuid/CODE0.290169802737920
+# FUNCIONA
+# BUSCA ALUNO POR MATRICULA
+GET http://localhost:8081/users/id/2
 
 ###
+# FUNCIONA
+# BUSCA ALUNO POR CORRESPONDENCIA DO NOME
+GET http://localhost:8081/users/name/Pedro
 
-GET http://localhost:8080/users/name/pedro
+###
+#FUNCIONA
+# BUSCA TODOS OS ALUNOS
+GET http://localhost:8081/users

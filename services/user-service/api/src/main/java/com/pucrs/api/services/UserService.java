@@ -50,9 +50,10 @@ public class UserService {
     return "CODE" + Math.random();
   }
 
-  public ResponseDto<User> getByUuid(String uuid) {
+  public ResponseDto<User> getByid(String id) {
     try {
-      User user = this.userRepository.findByUuid(uuid);
+      
+      User user = this.userRepository.findById(Integer.parseInt(id));
       if (user == null) {
         return new ResponseDto<>("Usuário não encontrado");
       }
