@@ -1,9 +1,23 @@
-FROM golang:latest
+# Usando uma imagem base com Go
+FROM golang:1.20
 
-WORKDIR /go/app
+# Definir o diretório de trabalho
+WORKDIR /app
 
-RUN apt-get update
+# Copiar os arquivos de configuração do Go
+COPY go.mod go.sum ./
 
-RUN go mod tidy
+# Baixar as dependências
+RUN go mod download
 
-CMD ["tail", "-f", "/dev/null"]
+# Copiar o código-fonte para dentro do contêiner
+COPY . .
+
+# Mudar para o diretório onde o main.go está localizado
+WORKDIR /app/cmd/app
+
+# Compilar o binário da aplicação
+RUN go build -o main .
+
+# Definir o comando para rodar a aplicação
+CMD ["./main"]

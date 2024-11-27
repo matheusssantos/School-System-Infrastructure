@@ -29,9 +29,9 @@ public class UserController {
     return this.userService.register(data);
   }
 
-  @GetMapping("/uuid/{uuid}")
-  public ResponseDto<User> findUserByCode(@PathVariable String uuid) {
-    return this.userService.getByUuid(uuid);
+  @GetMapping("/id/{id}")
+  public ResponseDto<User> findUserByCode(@PathVariable String id) {
+    return this.userService.getByid(id);
   }
 
   @GetMapping("/name/{name}")

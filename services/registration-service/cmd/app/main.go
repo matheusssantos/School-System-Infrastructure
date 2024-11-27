@@ -16,6 +16,7 @@ import (
 
 func main() {
 	// Conexão com o banco de dados do school (PostgreSQL)
+	fmt.Print("Tentando conectador com o banco")
 	dbSchool, err := sql.Open("postgres", "user=postgres password=postgres host=host.docker.internal port=5432 dbname=school sslmode=disable")
 	if err != nil {
 		fmt.Println("Erro ao conectar-se ao banco school")
@@ -38,10 +39,10 @@ func main() {
 	registrationRepository := repository.NewRegistrationPostgres(dbSchool, dbUsers)
 
 	// Criar a tabela 'registration' no banco school (PostgreSQL)
-	err = registrationRepository.CreateRegistrationTable(dbSchool)
-	if err != nil {
-		log.Fatal("Erro ao criar a tabela:", err)
-	}
+	// err = registrationRepository.CreateRegistrationTable(dbSchool)
+	// if err != nil {
+	// 	log.Fatal("Erro ao criar a tabela:", err)
+	// }
 
 	// Criação do caso de uso para a matrícula
 	createRegistrationUseCase := usecase.NewRegistrationUseCase(registrationRepository)

@@ -24,8 +24,6 @@ public class User {
   @Column(nullable = false)
   private String RG;
 
-  @Column(nullable = false)
-  private String uuid;
 
   @Column(nullable = false)
   private String type;
@@ -40,16 +38,11 @@ public class User {
     this.name = name;
     this.RG = RG;
     this.address = address;
-    this.uuid = uuid;
     this.type = type;
   }
 
   public Address getAddress() {
     return this.address;
-  }
-
-  public String getUuid() {
-    return this.uuid;
   }
 
   public String getName() {
