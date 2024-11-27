@@ -1,0 +1,37 @@
+.modal-overlay {
+  background-color: #00000054;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 7;
+}
+
+.modal-content {
+  width: 70%;
+  background-color: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  position: relative;
+  
+  h1 {
+    color: #1616fe;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .bx-x-circle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #1616fe;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}

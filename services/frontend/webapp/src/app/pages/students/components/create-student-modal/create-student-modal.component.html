@@ -1,0 +1,18 @@
+<app-base-modal [title]="'Registrar estudante'" (onCloseModal)="closeEmitter.emit(false)">
+  <form [formGroup]="studentForm">
+    <app-input label="Nome" formControlName="name"></app-input>
+    <app-input label="RG" formControlName="rg"></app-input>
+
+    <h2>Dados do endereço</h2>
+    <app-input label="CEP" formControlName="zipcode"></app-input>
+    <div class="row">
+      <app-input [style.width]="'100%'" label="Rua" formControlName="street"></app-input>
+      <app-input label="Número" formControlName="number"></app-input>
+    </div>
+    <app-input label="Complemento" formControlName="complement"></app-input>
+    <div class="buttons">
+      <app-button [value]="'Cancelar'" (onClick)="closeEmitter.emit(false)"></app-button>
+      <app-button [value]="'Salvar'" (onClick)="onSave()"></app-button>
+    </div>
+  </form>
+</app-base-modal>

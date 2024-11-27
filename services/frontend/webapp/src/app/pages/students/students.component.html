@@ -1,7 +1,10 @@
 <main>
   <h1>Estudantes</h1>
 
-  <app-button value="Registrar novo estudante"></app-button>
+  <app-button 
+    value="Registrar novo estudante" 
+    (onClick)="showCreateStudentModal = true"
+  ></app-button>
 
   <table *ngIf="students.length">
     <tr>
@@ -16,3 +19,8 @@
     </tr>
   </table>
 </main>
+
+<app-create-student-modal
+  *ngIf="showCreateStudentModal"
+  (closeEmitter)="onCloseModal($event)"
+></app-create-student-modal>

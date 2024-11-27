@@ -1,1 +1,7 @@
-<p>base-modal works!</p>
+<main class="modal-overlay" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <i class="bx bx-x-circle" (click)="close()"></i>
+    <h1>{{ title }}</h1>
+    <ng-content></ng-content>
+  </div>
+</main>

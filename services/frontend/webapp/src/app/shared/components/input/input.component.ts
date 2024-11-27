@@ -2,8 +2,12 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
+  Optional,
   Output,
+  Self,
 } from '@angular/core';
+import { ControlValueAccessor, NgControl, Validators } from '@angular/forms';
 
 type InputTypes =
   | 'text'
@@ -17,7 +21,7 @@ type InputTypes =
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent {
+export class InputComponent implements ControlValueAccessor {
   @Output() onChangeEmitter: EventEmitter<string> = new EventEmitter();
 
   @Input() type: InputTypes = 'text';
@@ -27,13 +31,37 @@ export class InputComponent {
   @Input() required: boolean = false;
   @Input() value: string = '';
 
-  public getInputValue(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.setValue(value);
+  public onChange: any = () => {};
+  public onTouched: any = () => {};
+
+  constructor(
+    @Self() @Optional() public ngControl: NgControl,
+  ) {
+    if (this.ngControl != null) {
+      this.ngControl.valueAccessor = this;
+    }
   }
 
-  private setValue(value: string): void {
-    this.value = value;
-    this.onChangeEmitter.emit(value);
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  public writeValue(value: string): void {
+    console.log(value);
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  public getInputValue(event: Event): void {
+    this.value = (event.target as HTMLInputElement).value;
+    this.onChangeEmitter.emit(this.value);
+    this.onChange(this.value);
+    this.onTouched();
   }
 }
