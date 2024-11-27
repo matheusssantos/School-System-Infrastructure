@@ -4,6 +4,7 @@ from app.database import Database
 
 class SubjectService:
   
+  @staticmethod
   async def get_all():
     try:
       response = await Database.execute_query("SELECT * FROM subjects")
@@ -11,6 +12,7 @@ class SubjectService:
     except Exception:
       return create_error_response("Erro interno no servidor")
     
+  @staticmethod
   async def create(data: CreateSubjetctDto):
     try:
       # Salva na banco
@@ -21,6 +23,7 @@ class SubjectService:
     except Exception:
       return create_error_response("Erro interno no servidor")
     
+  @staticmethod
   async def get_students(subjectCode: int):
     try:
       # Busca a materia no banco
