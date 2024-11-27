@@ -8,4 +8,4 @@ volumes
 /out-tsc
 /bazel-out
 
-/node_modules
+services/frontend/webapp/node_modules
