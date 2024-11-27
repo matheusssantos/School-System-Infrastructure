@@ -6,6 +6,14 @@
     (onClick)="showCreateStudentModal = true"
   ></app-button>
 
+  <div class="input-area">
+    <app-input 
+      label="Nome do estudante" 
+      [value]="queryName" 
+      (onChangeEmitter)="onSearch($event)"
+    ></app-input>
+  </div>
+
   <table *ngIf="students.length">
     <tr>
       <th>ID</th>
