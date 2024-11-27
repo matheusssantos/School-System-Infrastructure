@@ -2,3 +2,10 @@ volumes/mysql_data
 columes/postgres_data
 volumes/*
 volumes
+
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+/node_modules
