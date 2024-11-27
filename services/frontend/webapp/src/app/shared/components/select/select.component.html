@@ -1,0 +1,13 @@
+<main>
+  <select 
+    [value]="selectedValue" 
+    (change)="updateValue($event)"
+    [disabled]="disabled"
+  >
+    <option defaultSelected hidden>Selecione</option>
+    <ng-container *ngFor="let item of data">
+      <option [value]="item[idProp]">{{ item[keywordProp] }}</option>
+    </ng-container>
+  </select>
+  <p>{{ label }}</p>
+</main>

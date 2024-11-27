@@ -1,0 +1,10 @@
+<main>
+  <input
+    [type]="type"
+    [value]="value"
+    (input)="getInputValue($event)"
+    [readOnly]="disabled"
+    [placeholder]="placeholder"
+  />
+  <p>{{ label }}</p>
+</main>

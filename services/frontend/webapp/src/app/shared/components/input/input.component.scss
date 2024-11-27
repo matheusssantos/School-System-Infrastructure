@@ -1,0 +1,38 @@
+
+main {
+  position: relative;
+
+  input {
+    padding: .8rem 1rem;
+    border-radius: 25px;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+    transition: .2s;
+    border: 1px solid #1616fe;
+  }
+ 
+  input:not(:focus):placeholder-shown {
+    border: 1px solid #010138;
+  }
+
+  p {
+    position: absolute;
+    transition: .2s;
+    font-size: 1rem;
+    top: -.4rem;
+    left: .9rem;
+    background-color: #FFF;
+    padding: 0 .2rem;
+    color: #1616fe;
+    pointer-events: none; 
+  }
+
+  input:not(:focus):placeholder-shown + p {
+    left: 1rem;
+    top: .9rem;
+    background-color: none;
+    font-size: 1rem;
+    color: #010138;
+  }
+}

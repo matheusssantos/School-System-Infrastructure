@@ -5,6 +5,7 @@ from app.logger import Logger
 
 class SubjectService:
   
+  @staticmethod
   async def get_all():
     try:
       response = await Database.execute_query("SELECT * FROM subjects")
@@ -12,6 +13,7 @@ class SubjectService:
     except Exception:
       return create_error_response("Erro interno no servidor")
     
+  @staticmethod
   async def create(data: CreateSubjetctDto):
     try:
        # 1. Insere a disciplina na tabela subjects
@@ -41,5 +43,4 @@ class SubjectService:
     except Exception as e:
       print(e)
       return create_error_response("Erro interno no servidor")
-    
     

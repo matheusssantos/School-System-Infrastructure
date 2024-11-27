@@ -1,0 +1,30 @@
+button {
+  display: flex;
+  justify-content: center;
+  background-color: #1616fe;
+  align-items: center;
+  color: #FFF;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  border-radius: 25px;
+  padding: .8rem 3rem;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  color: #FFF;
+  background-color: #010138;
+  padding: .8rem 4rem;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: .5;
+}
+
+button:active {
+  background-color: #FFF;
+  color: #010138;
+}

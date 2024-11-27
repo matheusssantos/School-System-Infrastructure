@@ -1,0 +1,14 @@
+<main>
+  <h1>Sistema Escolar</h1>
+
+  <div class="list">
+    <div  
+      *ngFor="let item of pages" 
+      (click)="goTo(item)" 
+      class="option" 
+      [ngClass]="{ 'selected': item.selected }"
+    >
+      <p>{{ item.name }}</p>
+    </div>
+  </div>
+</main>

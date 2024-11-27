@@ -1,3 +1,0 @@
-Serviço de disciplinas feito em FastAPI (Python)
-
-uvicorn app.main:app --reload
