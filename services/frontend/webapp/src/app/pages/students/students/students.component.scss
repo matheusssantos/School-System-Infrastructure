@@ -1,0 +1,25 @@
+:host {
+  width: 100%;
+}
+
+main {
+  padding: 2rem;
+
+  h1 {
+    color: #1616fe;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+
+    td, th {
+      border: 1px solid #010138;
+      font-size: 1rem;
+      padding: .5rem;
+    }
+  }
+}

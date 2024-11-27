@@ -1,0 +1,20 @@
+<main>
+  <h1>Registrar estudante</h1>
+
+  <form>
+    <app-input label="Nome"></app-input>
+    <app-input label="RG"></app-input>
+    <app-select label="Tipo"></app-select>
+
+    <h2>Dados do endereço</h2>
+    <app-input label="CEP"></app-input>
+    <div class="row">
+      <app-input label="Rua"></app-input>
+      <app-input label="Número"></app-input>
+    </div>
+    <app-input label="Complemento"></app-input>
+    <div class="buttons">
+      <app-button [value]="'Salvar'"></app-button>
+    </div>
+  </form>
+</main>
