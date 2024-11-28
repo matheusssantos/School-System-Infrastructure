@@ -1,7 +1,6 @@
 from app.functions import create_error_response, create_success_response
 from app.dtos import CreateSubjetctDto
 from app.database import Database
-from app.logger import Logger
 
 class SubjectService:
   
@@ -16,30 +15,25 @@ class SubjectService:
   @staticmethod
   async def create(data: CreateSubjetctDto):
     try:
-       # 1. Insere a disciplina na tabela subjects
-        print("Criando subject!")
-        insert_subject_query = """
-          INSERT INTO subjects (code, name, turn)
-          VALUES ($1, $2, $3)
-          RETURNING id;
-        """
-        subject_id = await Database.execute_query(insert_subject_query, data.code, data.name, data.turn)
-        print(subject_id)
+      insert_subject_query = """
+        INSERT INTO subjects (code, name, turn)
+        VALUES ($1, $2, $3)
+        RETURNING id, name
+      """
+      subject = await Database.execute_query(insert_subject_query, data.code, data.name, data.turn)
+      if not subject:
+        return create_error_response("Erro ao cadastrar matéria")
 
-        print("Criando group!")
-        # 2. Insere a turma (group) na tabela group associando à disciplina criada
-        insert_group_query = """
-          INSERT INTO "group" (subject_id)
-          VALUES ($1)
-          RETURNING id;
-        """
-        group_id = await Database.execute_query(insert_group_query, subject_id.id)
-            
-        # 3. Se tudo deu certo, retorna sucesso
-        return create_success_response({
-          "subject": data,  # Retorna os dados da disciplina criada
-          "group_id": group_id.id  # Retorna o ID do grupo criado
-        })
+      insert_group_query = """
+        INSERT INTO "group" (subject_id)
+        VALUES ($1)
+        RETURNING id
+      """
+      group = await Database.execute_query(insert_group_query, subject[0]['id'])
+      if not group:
+        return create_error_response("Erro ao cadastrar turma")
+          
+      return create_success_response(subject[0])
     except Exception as e:
       print(e)
       return create_error_response("Erro interno no servidor")

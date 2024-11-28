@@ -5,11 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DB_USER = "postgres"  # O valor de POSTGRES_USER
-DB_PASSWORD = "postgres"  # O valor de POSTGRES_PASSWORD
-DB_HOST = "postgres"  # O nome do host no Docker Desktop
-DB_PORT = "5432"  # A porta do banco de dados
-DB_NAME = "school"  # O valor de POSTGRES_DB
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = int(os.getenv("DB_PORT", 5432))
+DB_NAME = os.getenv("DB_NAME")
 
 class Database:
   
@@ -19,22 +19,20 @@ class Database:
   async def connect():
     if Database.connection is None:
       try:
-        connection_url = "postgresql://postgres:postgres@postgres:5432/school"
-                
+        # connection_url = "postgresql://postgres:postgres@postgres:5432/school"
         # Conectando com a URL de conexão
-        Database.connection = await asyncpg.connect(connection_url)
+        # Database.connection = await asyncpg.connect(connection_url)
 
-        # Database.connection = await asyncpg.connect(
-        #   user=DB_USER,
-        #   password=DB_PASSWORD,
-        #   host=DB_HOST,
-        #   port=DB_PORT,
-        #   database=DB_NAME
-        # )
+        Database.connection = await asyncpg.connect(
+          user=DB_USER,
+          password=DB_PASSWORD,
+          host=DB_HOST,
+          port=DB_PORT,
+          database=DB_NAME
+        )
         Logger.database("Conexão bem-sucedida com o banco de dados!")
       except Exception as e:
         Logger.database("Falha ao conectar no banco!", error=True)
-        print(e)
         
   @staticmethod
   async def disconnect():
@@ -62,9 +60,8 @@ class Database:
               FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
           );
       """)
-      
       Logger.database("Tabela 'group' criada com sucesso.")
-      print("tentando criar registration")
+      
       await Database.connection.execute("""
         CREATE TABLE IF NOT EXISTS registration (
           id SERIAL PRIMARY KEY,                                
@@ -73,11 +70,9 @@ class Database:
           CONSTRAINT fk_group FOREIGN KEY (group_id) REFERENCES "group"(id) ON DELETE CASCADE
         );
       """)
-      print("registratiobn criada")
       Logger.database("Tabela 'registrations' criada com sucesso.")
     except Exception as e:
       Logger.database("Erro ao criar tabelas", error=True)
-      print(e)
       
   @staticmethod
   async def sync():
@@ -90,8 +85,8 @@ class Database:
         )
         
         if not table_exists:
-          print("criando tabelas")
           await Database.create_tables()
+          
       except Exception as e:
         Logger.database(f"Erro ao sincronizar tabelas", error=True)
     else:
@@ -102,11 +97,8 @@ class Database:
   async def execute_query(query: str, *args):
     if Database.connection:
       try:
-        # Passa a query e os argumentos para o método do asyncpg
-        print("teste")
         return await Database.connection.fetch(query, *args)
       except Exception as e:
         Logger.database(f"Erro ao executar query: {e}", error=True)
-        # print(e)
 
       
