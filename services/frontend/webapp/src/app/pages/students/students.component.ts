@@ -17,7 +17,7 @@ import { CreateSubjectModalComponent } from "../subjects/components/create-subje
 })
 export class StudentsComponent implements OnInit {
 
-  private readonly API_URL = 'http://localhost:8080';
+  private readonly API_URL = 'http://localhost:8081';
 
   public students: StudentDTO[] = [];
   public showCreateStudentModal: boolean = false;

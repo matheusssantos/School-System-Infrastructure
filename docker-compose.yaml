@@ -81,4 +81,18 @@ services :
         condition: service_healthy
     environment:
       - DATABASE_URL=postgresql://user:password@postgres:5432/dbname  # URL do banco PostgreSQL
+
+
+  angular-app:
+    build:
+      context: ./services/frontend/webapp/
+      dockerfile: Dockerfile
+    container_name: angular-app
+    ports:
+      - "4200:4200"  # A porta que o Nginx usará para servir a aplicação
+    depends_on:
+      - go-app  # Caso o Angular precise interagir com o Go
+      - spring-app  # Caso o Angular precise interagir com o Spring
+    command: ["npm", "start"]  # Comando para rodar o servidor Angular
+    
      

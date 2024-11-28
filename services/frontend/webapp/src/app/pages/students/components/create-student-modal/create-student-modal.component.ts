@@ -18,7 +18,7 @@ export class CreateStudentModalComponent implements OnInit {
   @Output() closeEmitter: EventEmitter<boolean> = new EventEmitter();
 
   public studentForm!: FormGroup;
-  private readonly API_URL = 'http://localhost:8080';
+  private readonly API_URL = 'http://localhost:8081';
 
   constructor(
     private http: HttpClient,

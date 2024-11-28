@@ -1,0 +1,32 @@
+# Etapa 1: Construir a aplicação Angular
+FROM node:18 AS build
+
+# Definir o diretório de trabalho
+WORKDIR /app
+
+# Copiar o package.json e package-lock.json para instalar dependências
+COPY package*.json ./
+
+# Instalar as dependências
+RUN npm install
+
+# Copiar o restante dos arquivos do projeto Angular para o contêiner
+COPY . .
+
+# Construir a aplicação Angular para produção (opcional)
+RUN npm run build --prod
+
+# Etapa 2: Rodar o servidor de desenvolvimento Angular
+FROM node:18
+
+# Definir o diretório de trabalho novamente
+WORKDIR /app
+
+# Copiar os arquivos da etapa de build
+COPY --from=build /app .
+
+# Expor a porta padrão do Angular
+EXPOSE 4200
+
+# Comando para rodar o servidor de desenvolvimento Angular (ouvir em 0.0.0.0)
+CMD ["npm", "start", "--host", "0.0.0.0"]
