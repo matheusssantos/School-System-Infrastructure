@@ -2,6 +2,7 @@ package web
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"subject-service/internal/usecase"
 )
@@ -20,10 +21,12 @@ func NewRegistrationHandlers(createRegistrationUseCase *usecase.CreateRegistrati
 }
 
 func (r *RegistrationHandlers) CreateRegistrationHandler(w http.ResponseWriter, req *http.Request) {
+	log.Println("Cehgou no cnotroller")
 	var input usecase.CreateRegistrationInputDto
 	err := json.NewDecoder(req.Body).Decode(&input)
 
 	if err != nil {
+		log.Println("erro ao fazer decode do json")
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -31,6 +34,7 @@ func (r *RegistrationHandlers) CreateRegistrationHandler(w http.ResponseWriter, 
 	output, err := r.CreateRegistrationUseCase.Execute(input)
 
 	if err != nil {
+		log.Println("Erro ao executar use case")
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

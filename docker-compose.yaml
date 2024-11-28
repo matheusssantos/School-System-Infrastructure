@@ -30,6 +30,11 @@ services :
       - 3306:3306
     volumes:
       - ./volumes/mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=root"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
 
   go-app:
     build:
@@ -37,8 +42,10 @@ services :
       dockerfile: Dockerfile
     container_name: go-app
     depends_on:
-      - postgres
-      - mysql
+      postgres:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
     ports:
       - 8080:8080
     environment:
@@ -49,7 +56,7 @@ services :
       - DB_PORT=5432
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
-    command: ["tail", "-f", "/dev/null"]
+    command: ["./main"]
 
   spring-app:
     build:
