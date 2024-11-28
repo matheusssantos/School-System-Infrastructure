@@ -12,8 +12,9 @@ main {
   }
 
   .input-area {
-    width: 20vw;
     margin: 1.5rem 0;
+    display: flex;
+    gap: 1rem;
   }
 
   table {

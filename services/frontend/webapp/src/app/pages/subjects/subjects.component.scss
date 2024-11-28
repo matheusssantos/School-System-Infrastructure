@@ -20,6 +20,21 @@ main {
       border: 1px solid #010138;
       font-size: 1rem;
       padding: .5rem;
+
+      button {
+        background-color: #1616fe;
+        color: #FFF;
+        border: none;
+        outline: none;
+        padding: .5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: .2s;
+      }
+
+      button:hover {
+        background-color: #010138;
+      }
     }
   }
 }

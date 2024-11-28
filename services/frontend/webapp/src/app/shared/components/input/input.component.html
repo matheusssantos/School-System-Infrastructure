@@ -5,6 +5,7 @@
     (input)="getInputValue($event)"
     [readOnly]="disabled"
     [placeholder]="placeholder"
+    [ngClass]="{ 'disabled': disabled }"
   />
   <p>{{ label }}</p>
 </main>

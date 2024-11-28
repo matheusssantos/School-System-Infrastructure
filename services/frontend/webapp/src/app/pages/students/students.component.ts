@@ -21,7 +21,6 @@ export class StudentsComponent implements OnInit {
 
   public students: StudentDTO[] = [];
   public showCreateStudentModal: boolean = false;
-  public queryName: string = '';
 
   constructor(
     private http: HttpClient,
@@ -32,7 +31,7 @@ export class StudentsComponent implements OnInit {
   }
 
   private async setStudents(): Promise<void> {
-    const $obs = this.http.get<Response>(`${this.API_URL}/users`);
+    const $obs = this.http.get<Response<StudentDTO[]>>(`${this.API_URL}/users`);
     const res = await firstValueFrom($obs);
     if (res.success) {
       this.students = res.message;
@@ -49,14 +48,28 @@ export class StudentsComponent implements OnInit {
     }
   }
 
-  public async onSearch(name: string): Promise<void> {
+  public async searchByName(name: string): Promise<void> {
     if (name == '') {
       await this.setStudents();
     } else {
-      const $obs = this.http.get<Response>(`${this.API_URL}/users/name/` + name);
+      const $obs = this.http.get<Response<StudentDTO[]>>(`${this.API_URL}/users/name/` + name);
       const res = await firstValueFrom($obs);
       if (res.success) {
         this.students = res.message;
+      } else {
+        alert(res.message);
+      }
+    }
+  }
+
+  public async searchById(id: string): Promise<void> {
+    if (id == '') {
+      await this.setStudents();
+    } else {
+      const $obs = this.http.get<Response<StudentDTO>>(`${this.API_URL}/users/id/` + +id);
+      const res = await firstValueFrom($obs);
+      if (res.success) {
+        this.students = [res.message];
       } else {
         alert(res.message);
       }

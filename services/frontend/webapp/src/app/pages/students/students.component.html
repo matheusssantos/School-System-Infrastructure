@@ -6,17 +6,25 @@
     (onClick)="showCreateStudentModal = true"
   ></app-button>
 
-  <div class="input-area" *ngIf="students.length">
+  <div class="input-area">
     <app-input 
       label="Nome do estudante" 
-      [value]="queryName" 
-      (onChangeEmitter)="onSearch($event)"
+      (onChangeEmitter)="searchByName($event)"
+      [disabled]="inputId.value != ''"
+      #inputName
+    ></app-input>
+    <app-input 
+      label="Número da matricula" 
+      [type]="'number'"
+      (onChangeEmitter)="searchById($event)"
+      [disabled]="inputName.value != ''"
+      #inputId
     ></app-input>
   </div>
 
   <table *ngIf="students.length">
     <tr>
-      <th>ID</th>
+      <th>  Matricula</th>
       <th>Nome</th>
       <th>RG</th>
     </tr>

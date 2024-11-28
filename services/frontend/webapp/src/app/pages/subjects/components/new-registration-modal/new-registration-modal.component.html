@@ -1,0 +1,12 @@
+<app-base-modal [title]="'Matricular estudante'" (onCloseModal)="closeEmitter.emit(false)">
+  <form>
+    <app-input [disabled]="true" label="Código da disciplina" [value]="subject.code"></app-input>
+    <app-input label="Turma"></app-input>
+    <app-input [type]="'number'" label="Matricula do estudante"></app-input>
+
+    <div class="buttons">
+      <app-button [value]="'Cancelar'" (onClick)="closeEmitter.emit(false)"></app-button>
+      <app-button [value]="'Salvar'" (onClick)="onSave()"></app-button>
+    </div>
+  </form>
+</app-base-modal>

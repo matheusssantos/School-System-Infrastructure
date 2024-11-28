@@ -7,10 +7,11 @@ import { firstValueFrom } from 'rxjs';
 import { Response } from '../../shared/types/response';
 import { CommonModule } from '@angular/common';
 import { SubjectDTO } from '../../shared/dtos/subject.dto';
+import { NewRegistrationModalComponent } from "./components/new-registration-modal/new-registration-modal.component";
 
 @Component({
   selector: 'app-subjects',
-  imports: [ButtonComponent, InputComponent, CreateSubjectModalComponent, HttpClientModule, CommonModule],
+  imports: [ButtonComponent, InputComponent, CreateSubjectModalComponent, HttpClientModule, CommonModule, NewRegistrationModalComponent],
   templateUrl: './subjects.component.html',
   styleUrl: './subjects.component.scss'
 })
@@ -20,6 +21,7 @@ export class SubjectsComponent implements OnInit {
 
   public subjects: SubjectDTO[] = [];
   public showCreateSubjectModal: boolean = false;
+  public selectedSubject: SubjectDTO | null = null;
 
   constructor(
     private http: HttpClient,
@@ -32,7 +34,6 @@ export class SubjectsComponent implements OnInit {
   private async setSubjects(): Promise<void> {
     const $obs = this.http.get<Response<SubjectDTO[]>>(`${this.API_URL}/subjects`);
     const res = await firstValueFrom($obs);
-    console.log(res);
     if (res.success) {
       this.subjects = res.message;
     } else {

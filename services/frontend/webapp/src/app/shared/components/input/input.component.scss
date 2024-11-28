@@ -35,4 +35,10 @@ main {
     font-size: 1rem;
     color: #010138;
   }
+
+  .disabled {
+    opacity: .5;
+    pointer-events: none !important; 
+  }
+
 }

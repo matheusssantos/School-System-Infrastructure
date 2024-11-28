@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -18,6 +19,7 @@ type InputTypes =
 
 @Component({
   selector: 'app-input',
+  imports: [CommonModule],
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })

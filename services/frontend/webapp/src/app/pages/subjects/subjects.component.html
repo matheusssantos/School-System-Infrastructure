@@ -12,12 +12,16 @@
       <th>Nome</th>
       <th>Código</th>
       <th>Turno</th>
+      <th>Ações</th>
     </tr>
     <tr *ngFor="let item of subjects">
       <td>{{ item.id }}</td>
       <td>{{ item.name }}</td>
       <td>{{ item.code }}</td>
       <td>{{ item.turn }}</td>
+      <td>
+        <button (click)="selectedSubject = item">Nova matricula</button>
+      </td>
     </tr>
   </table>
 </main>
@@ -26,3 +30,8 @@
   *ngIf="showCreateSubjectModal"
   (closeEmitter)="onCloseModal($event)"
 ></app-create-subject-modal>
+
+<app-new-registration-modal
+  *ngIf="selectedSubject"
+  (closeEmitter)="selectedSubject = null"
+></app-new-registration-modal>
