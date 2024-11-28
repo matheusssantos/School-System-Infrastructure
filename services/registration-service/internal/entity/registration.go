@@ -12,11 +12,11 @@ type ResgistrationRepository interface {
 }
 
 type Registration struct {
-	UserID  string
-	GroupID string
+	UserID  int
+	GroupID int
 }
 
-func NewRegistration(UserID string, GroupID string) *Registration {
+func NewRegistration(UserID int, GroupID int) *Registration {
 	return &Registration{
 		UserID:  UserID,
 		GroupID: GroupID,

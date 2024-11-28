@@ -16,7 +16,7 @@ func NewRegistrationQueriesUseCase(registrationRepository entity.ResgistrationRe
 
 // Input e Output para "Consultar Turmas de um Estudante"
 type FindGroupsByStudentIDInputDto struct {
-	StudentID int `json:"student_id"`
+	StudentID int `json:"user_id"`
 }
 
 type GroupDto struct {
@@ -41,7 +41,6 @@ func (uc *RegistrationQueriesUseCase) FindGroupsByStudentID(input FindGroupsBySt
 		groupDtos[i] = GroupDto{
 			ID:           group.ID,
 			DisciplineID: group.DisciplineID,
-			Name:         group.Name,
 		}
 	}
 

@@ -1,11 +1,14 @@
 # Usando uma imagem base com Go
-FROM golang:1.20
+FROM golang:1.21
 
 # Definir o diretório de trabalho
 WORKDIR /app
 
 # Copiar os arquivos de configuração do Go
 COPY go.mod go.sum ./
+
+# Baixar as dependências e limpar o go.mod
+RUN go mod tidy
 
 # Baixar as dependências
 RUN go mod download

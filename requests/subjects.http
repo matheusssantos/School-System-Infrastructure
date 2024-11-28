@@ -4,29 +4,38 @@ POST http://127.0.0.1:8000/subjects/create
 Content-Type: application/json
 
 {
-  "code": "S001",
-  "name": "FDS",
+  "code": "S002",
+  "name": "PSA",
   "turn": "A"
 }
 
-##
-##
-POST http://127.0.0.1:8000/subjects/create
+
+###
+POST http://127.0.0.1:8080/registration
 Content-Type: application/json
 
 {
-  "code": "S002",
-  "name": "psa",
-  "turn": "b"
+    "user_id": 2,
+    "group_id": 1
 }
 
-
-##
-POST http://127.0.0.1:8080/registrations
+###
+POST http://127.0.0.1:8080/find-groups-by-student
 Content-Type: application/json
 
 {
-    "user_id": 3
-    "group_id": 
+    "user_id": 2
 }
-/registration"
+
+
+###
+POST http://127.0.0.1:8080/find-students-by-group
+Content-Type: application/json
+
+{
+    "group_id": 1
+}
+
+
+
+

@@ -1,15 +1,18 @@
 package usecase
 
-import "subject-service/internal/entity"
+import (
+	"log"
+	"subject-service/internal/entity"
+)
 
 type CreateRegistrationInputDto struct {
-	UserID  string `json:"user_id"`
-	GroupID string `json:"group_id"`
+	UserID  int `json:"user_id"`
+	GroupID int `json:"group_id"`
 }
 
 type CreateRegistrationOutputDto struct {
-	UserID  string
-	GroupID string
+	UserID  int
+	GroupID int
 }
 
 type CreateRegistrationUseCase struct {
@@ -26,6 +29,8 @@ func (uc *CreateRegistrationUseCase) Execute(input CreateRegistrationInputDto) (
 	registration := entity.NewRegistration(input.UserID, input.GroupID)
 	err := uc.ResgistrationRepository.Create(registration)
 	if err != nil {
+		log.Println("Erro ao criar matrícula")
+		log.Println(err)
 		return nil, err
 	}
 

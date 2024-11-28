@@ -31,12 +31,12 @@ class SubjectService:
           VALUES ($1)
           RETURNING id;
         """
-        group_id = await Database.execute_query(insert_group_query, subject_id.id)
+        group_id = await Database.execute_query(insert_group_query, subject_id[0]["id"] )
             
         # 3. Se tudo deu certo, retorna sucesso
         return create_success_response({
           "subject": data,  # Retorna os dados da disciplina criada
-          "group_id": group_id.id  # Retorna o ID do grupo criado
+          "group_id": group_id[0]["id"]# Retorna o ID do grupo criado
         })
     except Exception as e:
       print(e)
