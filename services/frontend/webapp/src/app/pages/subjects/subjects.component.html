@@ -1,0 +1,28 @@
+<main>
+  <h1>Disciplinas</h1>
+
+  <app-button 
+    value="Registrar nova disciplina" 
+    (onClick)="showCreateSubjectModal = true"
+  ></app-button>
+
+  <table *ngIf="subjects.length">
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Código</th>
+      <th>Turno</th>
+    </tr>
+    <tr *ngFor="let item of subjects">
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.code }}</td>
+      <td>{{ item.turn }}</td>
+    </tr>
+  </table>
+</main>
+
+<app-create-subject-modal
+  *ngIf="showCreateSubjectModal"
+  (closeEmitter)="onCloseModal($event)"
+></app-create-subject-modal>

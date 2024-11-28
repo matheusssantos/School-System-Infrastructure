@@ -9,3 +9,4 @@ volumes
 /bazel-out
 
 services/frontend/webapp/node_modules
+services/frontend/webapp/.angular

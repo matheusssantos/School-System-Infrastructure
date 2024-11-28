@@ -25,8 +25,8 @@ export class DrawerMenuComponent {
       selected: false,
     },
     {
-      name: "Matérias",
-      path: "",
+      name: "Disciplinas",
+      path: "subjects",
       selected: false,
     },
     {

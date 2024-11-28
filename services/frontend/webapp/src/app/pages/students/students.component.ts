@@ -7,6 +7,7 @@ import { StudentDTO } from '../../shared/dtos/student.dto';
 import { Response } from '../../shared/types/response';
 import { CreateStudentModalComponent } from "./components/create-student-modal/create-student-modal.component";
 import { InputComponent } from "../../shared/components/input/input.component";
+import { CreateSubjectModalComponent } from "../subjects/components/create-subject-modal/create-subject-modal.component";
 
 @Component({
   selector: 'app-students',

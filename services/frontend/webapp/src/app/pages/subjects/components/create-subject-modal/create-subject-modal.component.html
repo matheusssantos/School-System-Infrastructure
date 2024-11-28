@@ -1,0 +1,12 @@
+<app-base-modal [title]="'Cadastrar nova disciplina'" (onCloseModal)="closeEmitter.emit(false)">
+  <form [formGroup]="subjectForm">
+    <app-input label="Nome" formControlName="name"></app-input>
+    <app-input label="Código" formControlName="code"></app-input> 
+    <app-input label="Turno" formControlName="turn"></app-input> 
+
+    <div class="buttons">
+      <app-button [value]="'Cancelar'" (onClick)="closeEmitter.emit(false)"></app-button>
+      <app-button [value]="'Salvar'" (onClick)="onSave()"></app-button>
+    </div>
+  </form>
+</app-base-modal>
