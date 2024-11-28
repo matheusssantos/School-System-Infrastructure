@@ -7,9 +7,8 @@ Content-Type: application/json
 
 {
   "code": "S001",
-  "name": "FDS",
-  "turn": "A",
-  "classCode": 1
+  "name": "PSA",
+  "turn": "A"
 }
 
 ###

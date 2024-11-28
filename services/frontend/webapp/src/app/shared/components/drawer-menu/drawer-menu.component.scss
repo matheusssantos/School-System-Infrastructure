@@ -1,0 +1,41 @@
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 30vh;
+  background-color: #FFF;
+  padding: 1rem 0;  
+  gap: 2rem;
+
+  h1 {
+    font-size: 1.8rem;
+    padding-left: 1rem;
+    font-weight: normal;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    
+    .option {
+      font-size: 1.1rem;
+      padding: 1rem;
+      transition: .2s;
+      border: 1px solid transparent;
+      color: #3a3a3a;
+    }
+
+    .option:hover {
+      border: 1px solid #1616fe;
+      background-color: #bcd2fc;
+      border-right-width: 10px;
+      cursor: pointer;
+      color: #1616fe;
+    }
+
+    .selected {
+      border-right: 10px solid #1616fe;
+      color: #1616fe;
+    }
+  }
+}

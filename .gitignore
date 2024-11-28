@@ -2,3 +2,11 @@ volumes/mysql_data
 columes/postgres_data
 volumes/*
 volumes
+
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+services/frontend/webapp/node_modules
+services/frontend/webapp/.angular

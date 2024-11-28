@@ -1,0 +1,38 @@
+main {
+  position: relative;
+
+  select {
+    padding: .8rem 1rem;
+    border-radius: 25px;
+    border: 1px solid #010138;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+    transition: .2s;
+    cursor: pointer;
+  }
+
+  select:focus {
+    border: 1px solid #1616fe;
+  }
+
+  p {
+    position: absolute;
+    transition: .2s;
+    font-size: 1rem;
+    top: -.4rem;
+    left: .9rem;
+    background-color: #FFF;
+    padding: 0 .2rem;
+    color: #1616fe;
+    pointer-events: none; 
+  }
+
+  select:not(:focus) + p {
+    left: 1rem;
+    top: .9rem;
+    background-color: none;
+    font-size: 1rem;
+    color: #010138;
+  }
+}
